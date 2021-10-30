@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SigIN {
+class SigUp {
   static Future registration(email, password, name) async {
     try {
       UserCredential userCredential =

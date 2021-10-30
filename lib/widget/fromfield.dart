@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Formfields extends StatelessWidget {
   final TextEditingController? controller;
@@ -38,6 +39,11 @@ class Formfields extends StatelessWidget {
         prefixIcon: prefixIcon,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(width: 2, color: Colors.black),
+        ),
+        errorStyle: GoogleFonts.montserrat(
+          fontSize: 12,
+          color: Colors.red,
+          letterSpacing: 1,
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(width: 1, color: Colors.grey),

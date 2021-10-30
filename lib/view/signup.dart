@@ -1,26 +1,25 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, avoid_print
 
 import 'package:ebaybiting_app/animation/animationrouts.dart';
-import 'package:ebaybiting_app/components/signin.dart';
+import 'package:ebaybiting_app/components/signup.dart';
 import 'package:ebaybiting_app/view/Homepage/homescreen.dart';
-import 'package:ebaybiting_app/view/signup.dart';
 import 'package:ebaybiting_app/widget/fromfield.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class SignIn extends StatefulWidget {
-  static const String path = "SignInpage";
-  const SignIn({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+
+class SignUppage extends StatefulWidget {
+  static const String path = "SignUppage";
+  const SignUppage({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignInpageState createState() => _SignInpageState();
 }
 
-class _SignInState extends State<SignIn> {
-  var fromkey = GlobalKey<FormState>();
+class _SignInpageState extends State<SignUppage> {
   bool showpassword = true;
+  var fromkey = GlobalKey<FormState>();
+  TextEditingController nameconteroller = TextEditingController();
   TextEditingController emaiconteroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
 
@@ -30,28 +29,55 @@ class _SignInState extends State<SignIn> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            margin: EdgeInsets.only(left: 10, right: 10, top: 30),
+            margin: EdgeInsets.only(top: 50, left: 10, right: 10, bottom: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                AspectRatio(
-                  aspectRatio: 2,
-                  child: Image.asset('images/applogo.png'),
+                Container(
+                  child: Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 50,
                 ),
                 Text(
-                  'Please Signin',
+                  'Please registration',
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
                 Form(
                   key: fromkey,
                   child: Column(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Formfields(
+                        controller: nameconteroller,
+                        prefixIcon: Icon(Icons.person,
+                            color: Colors.black.withOpacity(0.8)),
+                        labelText: 'Your Name',
+                        obsettext: false,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Please enter Your name');
+                          }
+                        },
+                      ),
                       SizedBox(
                         height: 15,
                       ),
@@ -97,69 +123,35 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 8),
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              'Forget password?',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                          ],
-                        ),
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20, top: 35),
+                        padding: const EdgeInsets.only(bottom: 20, top: 20),
                         child: SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
                               onPressed: () {
-                                if (fromkey.currentState!.validate()) {
-                                  fromkey.currentState!.save();
-                                  SIGNIN.signin(
-                                    emaiconteroller.text,
-                                    passwordcontroller.text,
-                                  );
-                                  Navigator.push(
-                                      context, createdroute(HomeScreen()));
-                                  emaiconteroller.clear();
-                                  passwordcontroller.clear();
-                                }
+                                setState(() {
+                                  if (fromkey.currentState!.validate()) {
+                                    fromkey.currentState!.save();
+                                    SigUp.registration(
+                                      emaiconteroller.text,
+                                      passwordcontroller.text,
+                                      nameconteroller.text,
+                                    );
+                                    Navigator.push(
+                                        context, createdroute(HomeScreen()));
+                                  }
+                                });
+                                emaiconteroller.clear();
+                                passwordcontroller.clear();
+                                nameconteroller.clear();
                               },
-                              child: Text('SIGNIN')),
+                              child: Text('SUBMIT')),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              'Don\'t have on account ?',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context, createdroute(SignUppage()));
-                              },
-                              child: Text('Sign-Up',
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.blueAccent,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
