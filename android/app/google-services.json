@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "985412304534",
+    "project_id": "ebaybitingapp",
+    "storage_bucket": "ebaybitingapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985412304534:android:2c6fdf1eb3e6005e2e8cb7",
+        "android_client_info": {
+          "package_name": "com.example.ebaybiting_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985412304534-ps0d0gkibdv5m4kuv5hk0mqftp6bqql8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc5hjQjIYBA-a3GygVAHUXTVCoxpCq9w0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985412304534-ps0d0gkibdv5m4kuv5hk0mqftp6bqql8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
