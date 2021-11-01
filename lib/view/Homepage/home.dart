@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, avoid_print, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ebaybiting_app/animation/animationrouts.dart';
+import 'package:ebaybiting_app/view/Homepage/productdetels.dart';
 import 'package:ebaybiting_app/widget/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -102,7 +104,26 @@ class _HomepageState extends State<Homepage> {
                                           width: 50,
                                         ),
                                         ElevatedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                createdroute(
+                                                  ProductDetels(
+                                                    image: productlist[index]
+                                                        ['productimage'],
+                                                    productname:
+                                                        productlist[index]
+                                                            ['Productname'],
+                                                    productprice:
+                                                        productlist[index]
+                                                            ['Productprice'],
+                                                    productdiscrption:
+                                                        productlist[index]
+                                                            ['productdis'],
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                             child: Text('BID NOW'))
                                       ],
                                     ),
