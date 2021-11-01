@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:ebaybiting_app/animation/animationrouts.dart';
 import 'package:ebaybiting_app/view/Homepage/dashboard.dart';
 import 'package:ebaybiting_app/view/Homepage/home.dart';
+import 'package:ebaybiting_app/view/productpost/productpost.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, createdroute(Productpost()));
+        },
         child: Icon(Icons.post_add),
       ),
       bottomNavigationBar: BottomNavigationBar(
