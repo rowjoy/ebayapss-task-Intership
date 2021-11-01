@@ -9,7 +9,7 @@ class BITUSER {
         .set({
           'Bit-User-Name': namebit,
           "Bit-user-number": pnonebit,
-          "Bit-price": pnonebit,
+          "Bit-price": pricebit,
         })
         // ignore: avoid_print
         .then((value) => print('All Ok'))
