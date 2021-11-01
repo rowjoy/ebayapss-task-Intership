@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ebaybiting_app/components/biduserinfo.dart';
+import 'package:ebaybiting_app/widget/fromfield.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetels extends StatefulWidget {
@@ -20,6 +23,10 @@ class ProductDetels extends StatefulWidget {
 }
 
 class _ProductDetelsState extends State<ProductDetels> {
+  TextEditingController nameconteroller = TextEditingController();
+  TextEditingController phoneconteroller = TextEditingController();
+  TextEditingController priceconteroller = TextEditingController();
+  var fromkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +111,103 @@ class _ProductDetelsState extends State<ProductDetels> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.productprice!;
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 500,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Bid Now',
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
+                                SingleChildScrollView(
+                                  child: Form(
+                                      key: fromkey,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12),
+                                        child: Column(
+                                          children: [
+                                            Formfields(
+                                              controller: nameconteroller,
+                                              prefixIcon: Icon(Icons.person,
+                                                  color: Colors.black
+                                                      .withOpacity(0.8)),
+                                              labelText: 'Your Name',
+                                              obsettext: false,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return ('Please enter Your name');
+                                                }
+                                              },
+                                            ),
+                                            Formfields(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller: phoneconteroller,
+                                              prefixIcon: Icon(Icons.person,
+                                                  color: Colors.black
+                                                      .withOpacity(0.8)),
+                                              labelText: 'Phone Number',
+                                              obsettext: false,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return ('Please enter contect number');
+                                                }
+                                              },
+                                            ),
+                                            Formfields(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller: priceconteroller,
+                                              prefixIcon: Icon(Icons.person,
+                                                  color: Colors.black
+                                                      .withOpacity(0.8)),
+                                              labelText:
+                                                  'Mini bid price \$${widget.productprice!}',
+                                              obsettext: false,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return ('Please enter minemun price');
+                                                }
+                                              },
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    if (fromkey.currentState!
+                                                        .validate()) {
+                                                      fromkey.currentState!
+                                                          .save();
+                                                      BITUSER.bituseringo(
+                                                          nameconteroller.text,
+                                                          phoneconteroller.text,
+                                                          priceconteroller
+                                                              .text);
+                                                      nameconteroller.clear();
+                                                      phoneconteroller.clear();
+                                                      priceconteroller.clear();
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                  child: Text("BID DONE")),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                     child: Text('BID NOW'),
                   ),
                 ),
